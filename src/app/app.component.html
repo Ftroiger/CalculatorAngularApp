@@ -1,31 +1,63 @@
-<div class="container mt-4 form-control border-dark">
-  <div class="row">
-    <div class="col text-center">
-      <h1 class="h4 pb-2 mb-4 text-primary border-bottom border-dark text-center">{{title}}</h1>
-    </div>  
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <!-- Aquí está tu bloque de la calculadora -->
-      <div class="card border-dark">
-        <div class="card-body">
-          <div class="form-group">
-            <label for="numero1">Numero 1 <input type="number" name="numero1" id="" [(ngModel)]="numero1"></label>       
-          </div>
-          <div class="form-group mt-1">
-            <label for="numero2">Numero 2 <input type="number" name="numero2" id="" [(ngModel)]="numero2"></label>       
-          </div>
-          <div class="form-group mt-2">
-            <h3 class="text-center form-control border-dark">{{resultado}}</h3>
-          </div>
-          <!-- Aquí están los botones -->
-          <div class="d-flex justify-content-between mt-3">
-            <input class="btn btn-success" type="submit" value="   Sumar   " (click)="sumar()">
-            <input class="btn btn-danger" type="submit" value="  Restar   " (click)="restar()">
-            <input class="btn btn-primary" type="submit" value="Multiplicar" (click)="multiplicar()">
-            <input class="btn btn-warning " type="submit" value="  Dividir  " (click)="dividir()">
-          </div>
-        </div>
-      </div>
+<div class="container calculator mt-4">
+  <div class="calculator-screen">
+    <input class="input" type="text" placeholder="0" [(ngModel)]="value" (keydown)="handleKeyPress($event)">
     </div>
+  <div class="calculator-keys">
+      <div class="row">
+          <div class="col"><button class="btn btn-primary">(</button></div>
+          <div class="col"><button class="btn btn-primary">)</button></div>
+          <div class="col"><button class="btn btn-light function">|a|</button></div>
+          <div class="col"><button class="btn btn-light function">x²</button></div>
+          <div class="col"><button class="btn btn-light function">√</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>e</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>%</button></div>
+      </div>
+      <div class="row">
+          <div class="col"><button class="btn btn-light function" disabled>M+</button></div>
+          <div class="col"><button class="btn btn-light function">x^y</button></div>
+          <div class="col"><button class="btn btn-light function">³√x</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>ln</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>lg</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>log<sub>y</sub></button></div>
+          <div class="col"><button class="btn btn-light operator" (click)="introValue('/')">÷</button></div>
+      </div>
+      <div class="row">
+          <div class="col"><button class="btn btn-light function" disabled>MR</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>ctg</button></div>
+          <div class="col"><button class="btn btn-light function">π</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('7')">7</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('8')">8</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('9')">9</button></div>
+          <div class="col"><button class="btn btn-light operator" (click)="introValue('*')">×</button></div>
+      </div>
+      <div class="row">
+          <div class="col"><button class="btn btn-light function" disabled>MC</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>atg</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>tg</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('4')">4</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('5')">5</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('6')">6</button></div>
+          <div class="col"><button class="btn btn-light operator" (click)="introValue('-')">-</button></div>
+      </div>
+      <div class="row">
+          <div class="col"><button class="btn btn-light function" (click)="deleteValue()">⬅</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>acos</button></div>
+          <div class="col"><button class="btn btn-light function" disabled>cos</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('1')">1</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('2')">2</button></div>
+          <div class="col"><button class="btn btn-primary" (click)="introValue('3')">3</button></div>
+          <div class="col"><button class="btn btn-light operator" (click)="introValue('+')">+</button></div>
+      </div>
+      <div class="row">
+          <div class="col"><button class="btn btn-danger" (click)="clearDisplay()">C</button></div>
+          <div class="col"><button class="btn btn-light function" style="margin-left: 4px;" disabled>asin</button></div>
+          <div class="col"><button class="btn btn-light function" style="margin-left: 8px;" disabled>sin</button></div>
+          <div class="col"><button class="btn btn-primary" style="margin-left: 12px;" disabled>.</button></div>
+          <div class="col-4"><button class="btn btn-primary w-100" style="margin-left: 6px;">0</button></div>
+          
+          <div class="col"><button class="btn btn-primary equals" style="margin-left: -3px;">=</button></div>
+      </div>
   </div>
 </div>
+
+<app-footer></app-footer>
